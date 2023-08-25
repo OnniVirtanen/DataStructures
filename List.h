@@ -13,7 +13,7 @@ public:
      * Adds an item to end of the list
      * @param item to add
      */
-    virtual void Add(const T& item) = 0;
+    virtual void Add(T item) = 0;
     /**
      * Removes item from given index
      * @param index of list
@@ -35,7 +35,7 @@ public:
      * @param item reference
      * @return boolean
      */
-    virtual bool Contains(const T& item) const = 0;
+    virtual bool Contains(T item) const = 0;
 
     virtual ~List() = default;
 };

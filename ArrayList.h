@@ -12,11 +12,11 @@ template<typename T>
 class ArrayList : public List<T>
 {
 public:
-    void Add(const T& item) override;
+    void Add(T item) override;
     void Remove(size_t index) override;
     [[nodiscard]] size_t Size() const override;
     T Get(size_t index) const override;
-    bool Contains(const T& item) const override;
+    bool Contains(T item) const override;
     ArrayList();
     ~ArrayList();
 private:
@@ -42,7 +42,7 @@ ArrayList<T>::~ArrayList()
 }
 
 template<typename T>
-void ArrayList<T>::Add(const T &item)
+void ArrayList<T>::Add(const T item)
 {
     // check if there is room to add
     if (m_index + 1 == m_capacity) { Grow(); }
@@ -50,7 +50,7 @@ void ArrayList<T>::Add(const T &item)
 }
 
 template<typename T>
-bool ArrayList<T>::Contains(const T &item) const
+bool ArrayList<T>::Contains(const T item) const
 {
     for (size_t i = 0; i <= m_index; i++)
     {
