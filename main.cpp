@@ -1,21 +1,16 @@
 #include <iostream>
 #include "ArrayList.h"
-#include "List.h"
 
-#define LOG(msg, x) std::cout << msg << x << std::endl
+#define LOG(x) std::cout << x << std::endl
 
 int main() {
     List<int>* pArrayList = new ArrayList<int>();
-
-    pArrayList->Add(1);
-    pArrayList->Add(2);
-
-    LOG("size: ", pArrayList->Size());
-
-    for (int i = 0; i < pArrayList->Size(); i++)
-    {
-        std::cout << i << " element: " << pArrayList->Get(i) << std::endl;
-    }
+    pArrayList->Add(25);
+    pArrayList->Add(32);
+    pArrayList->Add(24);
+    pArrayList->Add(54);
+    LOG(pArrayList->Get(pArrayList->Size() - 1));
+    pArrayList->Remove(pArrayList->Size() - 1);
 
     delete pArrayList;
 

@@ -5,9 +5,6 @@
 #pragma once
 #include "List.h"
 
-static const int START_CAPACITY = 4;
-static const int MULTIPLY_CAPACITY = 2;
-
 template<typename T>
 class ArrayList : public List<T>
 {
@@ -21,7 +18,7 @@ public:
     ~ArrayList();
 private:
     T* m_array;
-    int m_index;
+    size_t m_size;
     size_t m_capacity;
     void Grow();
     void Shrink();
@@ -30,9 +27,9 @@ private:
 template<typename T>
 ArrayList<T>::ArrayList()
 {
-    m_index = -1;
-    m_capacity = START_CAPACITY;
-    m_array = new T[START_CAPACITY];
+    m_size = 0;
+    m_capacity = 1;
+    m_array = new T[1];
 }
 
 template<typename T>
@@ -41,18 +38,19 @@ ArrayList<T>::~ArrayList()
     delete[] m_array;
 }
 
+// checked
 template<typename T>
 void ArrayList<T>::Add(const T item)
 {
-    // check if there is room to add
-    if (m_index + 1 == m_capacity) { Grow(); }
-    m_array[++m_index] = item;
+    if (m_size == m_capacity) { Grow(); }
+    m_array[m_size++] = item;
 }
 
+// checked
 template<typename T>
 bool ArrayList<T>::Contains(const T item) const
 {
-    for (size_t i = 0; i <= m_index; i++)
+    for (size_t i = 0; i < m_size; i++)
     {
         if (m_array[i] == item) { return true; }
     }
@@ -60,11 +58,11 @@ bool ArrayList<T>::Contains(const T item) const
     return false;
 }
 
+// checked
 template<typename T>
 T ArrayList<T>::Get(size_t index) const
 {
-    if (index <= m_index)
-    {
+    if (index < m_size) {
         return m_array[index];
     }
     else
@@ -76,21 +74,21 @@ T ArrayList<T>::Get(size_t index) const
 template<typename T>
 size_t ArrayList<T>::Size() const
 {
-    return m_index + 1;
+    return m_size;
 }
 
 template<typename T>
 void ArrayList<T>::Remove(size_t index)
 {
-    if (index <= m_index)
+    if (index < m_size)
     {
-        for (size_t i = index; i < m_index; ++i)
+        for (size_t i = index; i < m_size - 1; i++)
         {
             m_array[i] = m_array[i + 1];
         }
-        --m_index;
+        --m_size;
 
-        if (m_index < m_capacity / 4)
+        if (m_size < m_capacity / 4)
         {
             Shrink();
         }
@@ -104,12 +102,10 @@ void ArrayList<T>::Remove(size_t index)
 template<typename T>
 void ArrayList<T>::Grow()
 {
-    if (m_index + 1 != m_capacity) { return; }
-
-    m_capacity *= MULTIPLY_CAPACITY;
+    m_capacity *= 2;
     T* newArray = new T[m_capacity];
 
-    for (size_t i = 0; i <= m_index; ++i)
+    for (size_t i = 0; i < m_size; ++i)
     {
         newArray[i] = m_array[i];
     }
@@ -121,12 +117,10 @@ void ArrayList<T>::Grow()
 template<typename T>
 void ArrayList<T>::Shrink()
 {
-    if (m_index >= m_capacity / 4) { return; }
-
     m_capacity /= 2;
     T* newArray = new T[m_capacity];
 
-    for (size_t i = 0; i <= m_index; ++i)
+    for (size_t i = 0; i <= m_size; ++i)
     {
         newArray[i] = m_array[i];
     }
