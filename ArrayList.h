@@ -46,7 +46,6 @@ void ArrayList<T>::Add(const T item)
     m_array[m_size++] = item;
 }
 
-// checked
 template<typename T>
 bool ArrayList<T>::Contains(const T item) const
 {
@@ -58,7 +57,6 @@ bool ArrayList<T>::Contains(const T item) const
     return false;
 }
 
-// checked
 template<typename T>
 T ArrayList<T>::Get(size_t index) const
 {
