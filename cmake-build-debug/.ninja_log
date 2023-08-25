@@ -1,0 +1,15 @@
+# ninja log v5
+7	294	7146554606624333	CMakeFiles/DataStructures.dir/ArrayList.cpp.obj	18d18d157eb651dc
+2	305	7146554606739189	CMakeFiles/DataStructures.dir/main.cpp.obj	2a8b7ce99ad08bed
+305	398	7146554607559238	DataStructures.exe	1e7851ec6325314c
+2	302	7146559409374012	CMakeFiles/DataStructures.dir/main.cpp.obj	2a8b7ce99ad08bed
+302	393	7146559410199692	DataStructures.exe	450d501462e40d3d
+2	299	7146560974461993	CMakeFiles/DataStructures.dir/main.cpp.obj	2a8b7ce99ad08bed
+300	390	7146560975281999	DataStructures.exe	450d501462e40d3d
+2	299	7146561047940819	CMakeFiles/DataStructures.dir/main.cpp.obj	2a8b7ce99ad08bed
+300	389	7146561048770821	DataStructures.exe	450d501462e40d3d
+3	299	7146562043872199	CMakeFiles/DataStructures.dir/main.cpp.obj	2a8b7ce99ad08bed
+300	388	7146562044682204	DataStructures.exe	450d501462e40d3d
+2	305	7146562770968168	CMakeFiles/DataStructures.dir/main.cpp.obj	2a8b7ce99ad08bed
+3	301	7146565466932625	CMakeFiles/DataStructures.dir/main.cpp.obj	2a8b7ce99ad08bed
+301	392	7146565467782625	DataStructures.exe	450d501462e40d3d
