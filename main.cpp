@@ -1,10 +1,11 @@
 #include <iostream>
 #include "ArrayList.h"
+#include "vector"
 
 #define LOG(x) std::cout << x << std::endl
 
 int main() {
-    List<int>* pArrayList = new ArrayList<int>();
+    auto* pArrayList = new ArrayList<int>();
     pArrayList->Add(25);
     pArrayList->Add(32);
     pArrayList->Add(24);

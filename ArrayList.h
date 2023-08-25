@@ -6,30 +6,52 @@
 #include "List.h"
 
 template<typename T>
-class ArrayList : public List<T>
+class ArrayList
 {
 public:
-    void Add(T item) override;
-    void Remove(size_t index) override;
-    [[nodiscard]] size_t Size() const override;
-    T Get(size_t index) const override;
-    bool Contains(T item) const override;
+    void Add(T item);
+    void Remove(size_t index);
+    [[nodiscard]] size_t Size() const;
+    T Get(size_t index) const;
+    bool Contains(T item) const;
+    const T& operator[](size_t index) const;
+    T& operator[](size_t index);
     ArrayList();
     ~ArrayList();
 private:
-    T* m_array;
-    size_t m_size;
-    size_t m_capacity;
+    T* m_array = nullptr;
+    size_t m_size = 0;
+    size_t m_capacity = 0;
     void Grow();
     void Shrink();
 };
+
+template<typename T>
+T &ArrayList<T>::operator[](size_t index)
+{
+    if (index >= m_size)
+    {
+        throw std::out_of_range("index out of bounds");
+    }
+    return m_array[index];
+}
+
+template<typename T>
+const T &ArrayList<T>::operator[](size_t index) const
+{
+    if (index >= m_size)
+    {
+        throw std::out_of_range("index out of bounds");
+    }
+    return m_array[index];
+}
 
 template<typename T>
 ArrayList<T>::ArrayList()
 {
     m_size = 0;
     m_capacity = 1;
-    m_array = new T[1];
+    m_array = new T[2];
 }
 
 template<typename T>
