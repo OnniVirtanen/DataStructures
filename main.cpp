@@ -1,19 +1,21 @@
 #include <iostream>
 #include "ArrayList.h"
-#include "vector"
 
 #define LOG(x) std::cout << x << std::endl
 
 int main() {
-    auto* pArrayList = new ArrayList<int>();
-    pArrayList->Add(25);
-    pArrayList->Add(32);
-    pArrayList->Add(24);
-    pArrayList->Add(54);
-    LOG(pArrayList->Get(pArrayList->Size() - 1));
-    pArrayList->Remove(pArrayList->Size() - 1);
+    auto* pIntegers = new ArrayList<int>();
+    pIntegers->Add(25);
+    pIntegers->Add(32);
+    pIntegers->Add(24);
+    pIntegers->Add(54);
 
-    delete pArrayList;
+    while (pIntegers->Size() > 0) {
+        LOG(pIntegers->Get(pIntegers->Size() - 1));
+        pIntegers->Remove(pIntegers->Size() - 1);
+    }
+
+    delete pIntegers;
 
     std::cout << "Hello, World!" << std::endl;
     return 0;

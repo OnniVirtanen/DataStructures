@@ -4,6 +4,7 @@
 
 #pragma once
 #include "List.h"
+#include <stdio.h>
 
 template<typename T>
 class ArrayList
@@ -14,8 +15,6 @@ public:
     [[nodiscard]] size_t Size() const;
     T Get(size_t index) const;
     bool Contains(T item) const;
-    const T& operator[](size_t index) const;
-    T& operator[](size_t index);
     ArrayList();
     ~ArrayList();
 private:
@@ -27,40 +26,20 @@ private:
 };
 
 template<typename T>
-T &ArrayList<T>::operator[](size_t index)
-{
-    if (index >= m_size)
-    {
-        throw std::out_of_range("index out of bounds");
-    }
-    return m_array[index];
-}
-
-template<typename T>
-const T &ArrayList<T>::operator[](size_t index) const
-{
-    if (index >= m_size)
-    {
-        throw std::out_of_range("index out of bounds");
-    }
-    return m_array[index];
-}
-
-template<typename T>
 ArrayList<T>::ArrayList()
 {
     m_size = 0;
-    m_capacity = 1;
-    m_array = new T[2];
+    m_capacity = 2;
+    m_array = new T[m_capacity]{};
 }
 
 template<typename T>
 ArrayList<T>::~ArrayList()
 {
+    memset(m_array, 0, sizeof(T) * m_capacity);
     delete[] m_array;
 }
 
-// checked
 template<typename T>
 void ArrayList<T>::Add(const T item)
 {
@@ -75,7 +54,6 @@ bool ArrayList<T>::Contains(const T item) const
     {
         if (m_array[i] == item) { return true; }
     }
-
     return false;
 }
 
@@ -102,12 +80,8 @@ void ArrayList<T>::Remove(size_t index)
 {
     if (index < m_size)
     {
-        for (size_t i = index; i < m_size - 1; i++)
-        {
-            m_array[i] = m_array[i + 1];
-        }
+        memmove(&m_array[index], &m_array[index + 1], sizeof(T) * (m_size - index - 1));
         --m_size;
-
         if (m_size < m_capacity / 4)
         {
             Shrink();
@@ -123,13 +97,8 @@ template<typename T>
 void ArrayList<T>::Grow()
 {
     m_capacity *= 2;
-    T* newArray = new T[m_capacity];
-
-    for (size_t i = 0; i < m_size; ++i)
-    {
-        newArray[i] = m_array[i];
-    }
-
+    T* newArray = new T[m_capacity]{};
+    memcpy(newArray, m_array, sizeof(T) * m_size);
     delete[] m_array;
     m_array = newArray;
 }
@@ -138,13 +107,8 @@ template<typename T>
 void ArrayList<T>::Shrink()
 {
     m_capacity /= 2;
-    T* newArray = new T[m_capacity];
-
-    for (size_t i = 0; i <= m_size; ++i)
-    {
-        newArray[i] = m_array[i];
-    }
-
+    T* newArray = new T[m_capacity]{};
+    memcpy(newArray, m_array, sizeof(T) * m_size);
     delete[] m_array;
     m_array = newArray;
 }
